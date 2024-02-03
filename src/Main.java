@@ -1,3 +1,4 @@
+import IPLService.DeliveryDataService;
 import IPLService.MatchesDataServiceInterface;
 import QuestionService.Questions;
 
@@ -21,11 +22,13 @@ public class Main {
         MatchesDataServiceInterface matchesDataServiceInterface= new MatchesDataServiceInterface();
         matchesDataServiceInterface.readData();
 
-//        DeliveryDataService deliveryDataService= new DeliveryDataService();
-//        deliveryDataService.readData();
+        DeliveryDataService deliveryDataService= new DeliveryDataService();
+        deliveryDataService.readData();
         Questions problem= new Questions();
-//        problem.questionOne();
-        problem.questionTwo();
+//      problem.questionOne();
+//        problem.questionTwo();
+        problem.questionThree();
+
 
 
 

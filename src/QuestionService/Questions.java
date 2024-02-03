@@ -6,7 +6,9 @@ import IPLService.MatchesDataServiceInterface;
 import Models.Deliveries;
 import Models.Matches;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class Questions {
@@ -17,7 +19,7 @@ public class Questions {
 //   HashSet<Integer> uniqueSeason = new HashSet<>();
 
    List<Matches> allMatches = MatchesDataServiceInterface.getAllMatchData();
-//   List<Deliveries> allDelivery = deliveryDataService.getAllDeliveryData();
+   List<Deliveries> allDeliveries = DeliveryDataService.getAllDeliveryData();
 
 
    HashMap<Integer, Integer> map1 = new HashMap<>();
@@ -69,8 +71,63 @@ public class Questions {
       for (Object key : map.keySet()) {
          System.out.println(key + " have  won "+ map.get(key) + " matches.");
       }
+   }
+
+  List<Matches> allMatches2016=  new ArrayList<>();
+   public void matches2016(){
+
+      for( Matches matches : allMatches){
+         if(matches.getSeason()== 2016){
+            allMatches2016.add(matches);
+         }
+      }
+   }
+
+   List<Deliveries> allDeliveries2016 = new ArrayList<>();
+   public  void deliveries2016(){
+
+      for(Matches matches : allMatches) {
+
+         if (matches.getSeason() == 2016) {
+            int val = matches.getMatchId();
+
+            for (Deliveries deliveries : allDeliveries) {
+               if (deliveries.getMatch_id() == val) {
+                  allDeliveries2016.add(deliveries);
+               }
+            }
+         }
+      }
+   }
+
+   HashMap<String ,Integer> map3= new HashMap<>();
+   public void questionThree(){
+      deliveries2016();
+
+      for(Deliveries deliveries : allDeliveries2016){
+
+         int runs;
+         if(map3.containsKey(deliveries.getBowlingTeam())){
+
+            runs= map3.get(deliveries.getBowlingTeam());
+            runs= runs+deliveries.getExtraRuns();
+            map3.put(deliveries.getBowlingTeam() , runs);
+         }
+         else{
+            map3.put(deliveries.getBowlingTeam(), deliveries.getExtraRuns());
+         }
+      }
+      printHashMap3(map3);
 
    }
+   public  void printHashMap3(HashMap map){
+
+      for (Object key : map.keySet()) {
+         System.out.println(key + " have  conceded "+ map.get(key) + " extra runs.");
+      }
+   }
+
+
 
 }
 

@@ -13,12 +13,13 @@ public class
 DeliveryDataService implements iplDataServiceInterface {
 
 
-    List<Deliveries> allDeliveryData = new ArrayList<>();
+    static List<Deliveries> allDeliveryData = new ArrayList<>();
 
-    public List<Deliveries> getAllDeliveryData(){
+    public static List<Deliveries> getAllDeliveryData(){
         return allDeliveryData;
 
     }
+
     @Override
     public void readData() {
 
@@ -74,10 +75,15 @@ DeliveryDataService implements iplDataServiceInterface {
         deliveries.setBatsmanRuns(Integer.parseInt(currentDelivery[15]));
         deliveries.setExtraRuns(Integer.parseInt(currentDelivery[16]));
         deliveries.setTotalRuns(Integer.parseInt(currentDelivery[17]));
-        deliveries.setPlayerDismissedName(currentDelivery[18]);
-        deliveries.setDismissalType(currentDelivery[19]);
-        deliveries.setFielderName(currentDelivery[20]);
-
+        if(currentDelivery.length >18){
+            deliveries.setPlayerDismissedName(currentDelivery[18]);
+        }
+        if(currentDelivery.length >19){
+            deliveries.setDismissalType(currentDelivery[19]);
+        }
+        if(currentDelivery.length >20){
+            deliveries.setFielderName(currentDelivery[20]);
+        }
         allDeliveryData.add(deliveries);
 
 
