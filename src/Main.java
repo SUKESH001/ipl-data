@@ -20,14 +20,5 @@ public class Main {
         problem.questionTwo();
         problem.questionThree();
         problem.questionFour();
-
-
-
-
-
-
-
-
-
     }
 }
