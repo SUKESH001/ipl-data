@@ -6,10 +6,7 @@ import IPLService.MatchesDataServiceInterface;
 import Models.Deliveries;
 import Models.Matches;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class Questions {
 
@@ -41,12 +38,17 @@ public class Questions {
    }
    private void printHashMap(HashMap map) {
 
+      System.out.println("Question 1");
+
        for (Object key : map.keySet()) {
-         System.out.println(map.get(key) + " matches were played in "  +key);
+         System.out.println(map.get(key) + " matches are played in "  +key);
       }
+      System.out.println();
    }
 
-   HashMap<String, Integer> map2= new HashMap<>();
+   //question2
+
+   Map<String, Integer> map2= new HashMap<>();
    public void questionTwo(){
 
       for(Matches matches : allMatches){
@@ -66,22 +68,17 @@ public class Questions {
       }
       printHashMap2(map2);
    }
-   public  void printHashMap2(HashMap map){
+   public  void printHashMap2(Map map){
+
+      System.out.println("Question 2");
 
       for (Object key : map.keySet()) {
          System.out.println(key + " have  won "+ map.get(key) + " matches.");
       }
+      System.out.println();
    }
 
-  List<Matches> allMatches2016=  new ArrayList<>();
-   public void matches2016(){
-
-      for( Matches matches : allMatches){
-         if(matches.getSeason()== 2016){
-            allMatches2016.add(matches);
-         }
-      }
-   }
+// Question 3
 
    List<Deliveries> allDeliveries2016 = new ArrayList<>();
    public  void deliveries2016(){
@@ -99,8 +96,7 @@ public class Questions {
          }
       }
    }
-
-   HashMap<String ,Integer> map3= new HashMap<>();
+   Map<String ,Integer> map3= new HashMap<>();
    public void questionThree(){
       deliveries2016();
 
@@ -120,39 +116,105 @@ public class Questions {
       printHashMap3(map3);
 
    }
-   public  void printHashMap3(HashMap map){
+   public  void printHashMap3(Map map){
+
+      System.out.println("Question 3");
 
       for (Object key : map.keySet()) {
          System.out.println(key + " have  conceded "+ map.get(key) + " extra runs.");
       }
+      System.out.println();
    }
 
+   //question 4
+   List<Deliveries> allDeliveries2015 = new ArrayList<>();
+   public  void deliveries2015(){
+
+      for(Matches matches : allMatches) {
+
+         if (matches.getSeason() == 2015) {
+            int val = matches.getMatchId();
+
+            for (Deliveries deliveries : allDeliveries) {
+               if (deliveries.getMatch_id() == val) {
+                  allDeliveries2015.add(deliveries);
+               }
+            }
+         }
+      }
+   }
+
+   Map<String , Integer> map4= new HashMap<>();
+   Map<String , Integer> map5= new HashMap<>();
+   Map<String , Float> map6= new HashMap<>();
+   public void questionFour(){
+
+      deliveries2015();
+      for(Deliveries deliveries : allDeliveries2015) {
+         int runs;
 
 
+         if (map4.containsKey(deliveries.getBowler())) {
+
+            runs = map4.get(deliveries.getBowler()) + deliveries.getWideRuns()
+                    + deliveries.getBatsmanRuns() + deliveries.getNoBallRuns();
+
+            map4.put(deliveries.getBowler(), runs);
+         } else {
+            map4.put(deliveries.getBowler(), deliveries.getWideRuns()
+                    + deliveries.getBatsmanRuns() + deliveries.getNoBallRuns());
+         }
+         int ball;
+
+         if(map5.containsKey(deliveries.getBowler())){
+
+            map5.put(deliveries.getBowler(), map5.get(deliveries.getBowler())+1);
+         }
+         else{
+            map5.put(deliveries.getBowler(), 1);
+         }
+      }
+
+      for(String key : map4.keySet()){
+         if(map5.containsKey(key)){
+            float val1 =map4.get(key);
+            float val2 = map5.get(key);
+            map6.put(key, (float) (val1 / val2));
+         }
+      }
+
+      printHashMap4();
+
+
+   }
+   public void printHashMap4(){
+
+      int count=0;
+      List<Map.Entry<String, Float>> entryList = new ArrayList<>(map6.entrySet());
+      entryList.sort(Map.Entry.comparingByValue());
+
+      LinkedHashMap<String, Float> sortedMap = new LinkedHashMap<>();
+      for (Map.Entry<String,Float> entry : entryList) {
+         sortedMap.put(entry.getKey(), entry.getValue());
+      }
+
+      System.out.println("Question4" );
+      System.out.println("Top bowlers with best economy");
+
+      for (Map.Entry<String, Float> entry : sortedMap.entrySet()) {
+         System.out.println( entry.getKey() + " economy of " + (entry.getValue()*6));
+         count++;
+         if( count==20){
+            break;
+         }
+
+      }
+
+   }
 }
 
 
-//
 
-//   private int getUniqueSeasons() {
-//      for (Matches matches : allMatches) {
-//         uniqueSeason.add(matches.getSeason()+1);
-////         System.out.println(matches.getSeason());
-//      }
-//      return uniqueSeason.size();
-//   }
-
-//   int n = getMatchCount();
-//   int n1= getUniqueSeasons();
-
-
-
-//   public int getAnswer() {
-////      System.out.println(n+" "+n1);
-//      return (n / n1);
-//
-////      System.out.println(allMatches.get(1).);
-//   }
 
 
 

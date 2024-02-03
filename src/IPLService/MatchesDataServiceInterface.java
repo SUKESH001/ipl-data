@@ -48,15 +48,6 @@ public class MatchesDataServiceInterface implements iplDataServiceInterface {
 
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }finally{
-            if(bufferedReader!=null){
-                try{
-                    bufferedReader.close();
-
-                }catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
 
     }

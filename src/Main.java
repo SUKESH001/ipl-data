@@ -7,27 +7,19 @@ import QuestionService.Questions;
 public class Main {
     public static void main(String[] args) {
 
-//        String file= "";
-//        System.out.printf(file);
-
-//
-//        ProblemOne problemOne= new ProblemOne();
-//        problemOne.getAnswer();
-
-//        DeliveryDataService deliveryDataService= new DeliveryDataService();
-//        deliveryDataService.answer();
-
-
 
         MatchesDataServiceInterface matchesDataServiceInterface= new MatchesDataServiceInterface();
         matchesDataServiceInterface.readData();
 
         DeliveryDataService deliveryDataService= new DeliveryDataService();
         deliveryDataService.readData();
+
         Questions problem= new Questions();
-//      problem.questionOne();
-//        problem.questionTwo();
+
+        problem.questionOne();
+        problem.questionTwo();
         problem.questionThree();
+        problem.questionFour();
 
 
 
