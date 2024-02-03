@@ -11,23 +11,36 @@ import java.util.List;
 
 public class MatchesDataServiceInterface implements iplDataServiceInterface {
 
-    List<Matches> allMatchData= new ArrayList<Matches>();
+    public static List<Matches> allMatchData= new ArrayList<Matches>();
+
+    public void answer(){
+        System.out.println(allMatchData.get(1));
+    }
+
+    public static List<Matches> getAllMatchData() {
+        return allMatchData;
+    }
+
 
     @Override
     public void readData() {
 
+        int i =0;
+        BufferedReader bufferedReader= null;
+
         try {
-            BufferedReader bufferedReader= new BufferedReader(new FileReader("src/matches.csv"));
+            bufferedReader= new BufferedReader(new FileReader("src/matches.csv"));
 
             String l;
 
             while((l=bufferedReader.readLine())!=null){
 
-                if(l.startsWith("match")) {
+                if(i==0) {
+                    i++;
                     continue;
                 }
 
-                String [] currentMatch= l.split(",");
+                String [] currentMatch= l.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
                 storeData(currentMatch);
 
 
@@ -39,6 +52,15 @@ public class MatchesDataServiceInterface implements iplDataServiceInterface {
 
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }finally{
+            if(bufferedReader!=null){
+                try{
+                    bufferedReader.close();
+
+                }catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
@@ -57,16 +79,18 @@ public class MatchesDataServiceInterface implements iplDataServiceInterface {
         matches.setTossWinner(currentMatch[6]);
         matches.setTossDecision(currentMatch[7]);
         matches.setMatchResult(currentMatch[8]);
-        matches.setDlApplied(currentMatch[9]);
-        matches.setWinByRuns(Integer.parseInt(currentMatch[10]));
-        matches.setWinByWickets(Integer.parseInt(currentMatch[11]));
-        matches.setPomName(currentMatch[12]);
-        matches.setVenue(currentMatch[13]);
-        matches.setUmpireOneName(currentMatch[14]);
-        matches.setUmpireTwoName(currentMatch[15]);
-        matches.setUmpireThreeName(currentMatch[16]);
+        matches.setDlApplied(Integer.parseInt(currentMatch[9]));
+        matches.setWinner(currentMatch[10]);
+        matches.setWinByRuns(Integer.parseInt(currentMatch[11]));
+        matches.setWinByWickets(Integer.parseInt(currentMatch[12]));
+        matches.setPomName(currentMatch[13]);
+        matches.setVenue(currentMatch[14]);
+//        matches.setUmpireOneName(currentMatch[15]);
+//        matches.setUmpireTwoName(currentMatch[16]);
+
 
         allMatchData.add(matches);
 
     }
+
 }

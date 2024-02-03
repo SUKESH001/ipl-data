@@ -1,6 +1,5 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import IPLService.MatchesDataServiceInterface;
+import ProblemService.Problem;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -17,6 +16,21 @@ public class Main {
 //        } catch (FileNotFoundException e) {
 //            throw new RuntimeException(e);
 //        }
+//        ProblemOne problemOne= new ProblemOne();
+//        problemOne.getAnswer();
+
+//        DeliveryDataService deliveryDataService= new DeliveryDataService();
+//        deliveryDataService.answe
+
+
+
+        MatchesDataServiceInterface matchesDataServiceInterface= new MatchesDataServiceInterface();
+        matchesDataServiceInterface.readData();
+
+//        DeliveryDataService deliveryDataService= new DeliveryDataService();
+//        deliveryDataService.readData();
+        Problem problemOne= new Problem();
+        problemOne.getMatchesPerSeason();
 
 
 

@@ -13,7 +13,7 @@ public class
 DeliveryDataService implements iplDataServiceInterface {
 
 
-    List<Deliveries> allDeliveryData = new ArrayList<Deliveries>();
+    List<Deliveries> allDeliveryData = new ArrayList<>();
     @Override
     public void readData() {
 

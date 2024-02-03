@@ -13,8 +13,19 @@ public class Matches {
     private String tossWinner;
     private String tossDecision;
     private String matchResult;
-    private String dlApplied;
+    private int dlApplied;
+
+    private String winner;
     private int winByRuns;
+
+    public String getWinner() {
+        return winner;
+    }
+
+    public void setWinner(String winner) {
+        this.winner = winner;
+    }
+
     private int winByWickets;
     private String pomName;
     private String venue;
@@ -94,11 +105,11 @@ public class Matches {
         this.matchResult = matchResult;
     }
 
-    public String getDlApplied() {
+    public int getDlApplied() {
         return dlApplied;
     }
 
-    public void setDlApplied(String dlApplied) {
+    public void setDlApplied(int dlApplied) {
         this.dlApplied = dlApplied;
     }
 
