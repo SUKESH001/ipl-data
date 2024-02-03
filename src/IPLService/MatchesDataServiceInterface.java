@@ -13,10 +13,6 @@ public class MatchesDataServiceInterface implements iplDataServiceInterface {
 
     public static List<Matches> allMatchData= new ArrayList<Matches>();
 
-    public void answer(){
-        System.out.println(allMatchData.get(1));
-    }
-
     public static List<Matches> getAllMatchData() {
         return allMatchData;
     }

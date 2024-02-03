@@ -14,6 +14,11 @@ DeliveryDataService implements iplDataServiceInterface {
 
 
     List<Deliveries> allDeliveryData = new ArrayList<>();
+
+    public List<Deliveries> getAllDeliveryData(){
+        return allDeliveryData;
+
+    }
     @Override
     public void readData() {
 
