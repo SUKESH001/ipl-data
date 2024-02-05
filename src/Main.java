@@ -15,7 +15,7 @@ public class Main {
         List<Match> matches = getMatchData();
         List<Delivery> deliveries = getDeliveryData();
 
-        findMatchesWonByEachTeamInEveryYear(matches);
+        findMatchesPlayedPerSeason(matches);
         findMatchesWonByEachTeamInEveryYear(matches);
         findExtraRunsConcededPerTeamIn2016( getDeliveries(matches, deliveries, 2016));
         findMostEconomicalBowlersOf2015(getDeliveries(matches, deliveries, 2015));
@@ -123,7 +123,7 @@ public class Main {
         return allMatchData;
     }
 
-    public void findMatchesPlayedPerSeason(List<Match> matches) {
+    public static  void findMatchesPlayedPerSeason(List<Match> matches) {
         HashMap<Integer, Integer> matchesPerSeason = new HashMap<>();
         for (Match match : matches) {
             int count;
