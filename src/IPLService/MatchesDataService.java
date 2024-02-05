@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MatchesDataServiceInterface implements iplDataServiceInterface {
+public class MatchesDataService implements iplDataServiceInterface {
 
     public static List<Matches> allMatchData= new ArrayList<Matches>();
 
@@ -72,6 +72,16 @@ public class MatchesDataServiceInterface implements iplDataServiceInterface {
         matches.setWinByWickets(Integer.parseInt(currentMatch[12]));
         matches.setPomName(currentMatch[13]);
         matches.setVenue(currentMatch[14]);
+
+        if(currentMatch.length>15){
+            matches.setUmpireOneName(currentMatch[15]);
+        }
+        if(currentMatch.length >16){
+            matches.setUmpireTwoName(currentMatch[16]);
+        }
+        if(currentMatch.length >17){
+            matches.setUmpireThreeName(currentMatch[17]);
+        }
 //        matches.setUmpireOneName(currentMatch[15]);
 //        matches.setUmpireTwoName(currentMatch[16]);
 

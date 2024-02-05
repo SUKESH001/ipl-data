@@ -2,7 +2,7 @@ package QuestionService;
 
 
 import IPLService.DeliveryDataService;
-import IPLService.MatchesDataServiceInterface;
+import IPLService.MatchesDataService;
 import Models.Deliveries;
 import Models.Matches;
 
@@ -15,7 +15,7 @@ public class Questions {
 //   HashSet<Integer> uniqueMatchIds = new HashSet<>();
 //   HashSet<Integer> uniqueSeason = new HashSet<>();
 
-   List<Matches> allMatches = MatchesDataServiceInterface.getAllMatchData();
+   List<Matches> allMatches = MatchesDataService.getAllMatchData();
    List<Deliveries> allDeliveries = DeliveryDataService.getAllDeliveryData();
 
 
@@ -168,10 +168,20 @@ public class Questions {
 
          if(map5.containsKey(deliveries.getBowler())){
 
+            int val=map4.get(deliveries.getBowler());
+            if(deliveries.getExtraRuns()==0 && deliveries.getNoBallRuns()==0){
+               val=val+1;
+
+            }
             map5.put(deliveries.getBowler(), map5.get(deliveries.getBowler())+1);
          }
          else{
-            map5.put(deliveries.getBowler(), 1);
+            int val =0;
+            if(deliveries.getWideRuns()==0 && deliveries.getNoBallRuns()==0){
+               val=1;
+
+            }
+            map5.put(deliveries.getBowler(), val);
          }
       }
 
@@ -210,6 +220,66 @@ public class Questions {
       }
 
    }
+
+   //question 5
+   //most number of runs in 2015 and 2016 combined
+
+   Map<String , Integer> map7= new HashMap<>();
+   public void questionFive(){
+
+      for(Deliveries deliveries : allDeliveries2015){
+
+         if(map7.containsKey(deliveries.getBatsmanName())){
+            int val =map7.get(deliveries.getBatsmanName())+deliveries.getBatsmanRuns();
+            map7.put(deliveries.getBatsmanName(), val);
+         }
+         else{
+            map7.put(deliveries.getBatsmanName(),deliveries.getBatsmanRuns());
+         }
+      }
+
+      for(Deliveries deliveries : allDeliveries2016){
+
+         if(map7.containsKey(deliveries.getBatsmanName())){
+            int val =map7.get(deliveries.getBatsmanName())+deliveries.getBatsmanRuns();
+            map7.put(deliveries.getBatsmanName(), val);
+         }
+         else{
+            map7.put(deliveries.getBatsmanName(),deliveries.getBatsmanRuns());
+         }
+      }
+      printHashMap5(map7);
+
+   }
+   public  void printHashMap5(Map map){
+
+
+
+      int count=0;
+      List<Map.Entry<String,Integer>> entryList = new ArrayList<>(map7.entrySet());
+      entryList.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+
+      LinkedHashMap<String, Integer> sortedMap = new LinkedHashMap<>();
+      for (Map.Entry<String, Integer> entry : entryList) {
+         sortedMap.put(entry.getKey(),(entry.getValue()));
+      }
+
+      System.out.println( );
+      System.out.println("Question 5");
+      System.out.println("Top10 Batsman with most runs in 2015 and 2016");
+
+      for (Map.Entry<String, Integer> entry : sortedMap.entrySet()) {
+         System.out.println( entry.getKey() + " scored " + (entry.getValue()) );
+         count++;
+         if( count==10){
+            break;
+         }
+      }
+
+   }
+
+
+
 }
 
 
