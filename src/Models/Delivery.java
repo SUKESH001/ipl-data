@@ -1,6 +1,6 @@
 package Models;
 
-public class Deliveries {
+public class Delivery {
 
     //creating getters and setters for every element in delivery file
 

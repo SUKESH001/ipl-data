@@ -1,8 +1,6 @@
 package Models;
 
-import java.util.Date;
-
-public class Matches {
+public class Match {
 
     private int matchId;
     private int season;
