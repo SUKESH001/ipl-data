@@ -1,6 +1,7 @@
 import Models.Delivery;
 import Models.Match;
 
+import javax.swing.plaf.PanelUI;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -10,6 +11,45 @@ import java.util.*;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static final int MATCH_ID = 0;
+    public static final int INNINGS_NUMBER=1;
+    public static final int BATTING_TEAM=2;
+    public static final int  BOWLING_TEAM=3;
+    public static final int OVER= 4;
+    public static final int BALL=5;
+    public static final int BATSMAN_NAME=6;
+    public static final int BATSMAN_NAME_NS=7;
+    public static final int BOWLER=8;
+    public static final int IS_MATCH_SUPER_OVER=9;
+    public static final int WIDER_RUNS=10;
+    public static final int BYE_RUNS=11;
+    public static final int LEG_BYE_RUNS=12;
+    public static final int NO_BALL_RUNS=13;
+    public static final int PENALTY_RUNS=14;
+    public static final int BATSMAN_RUNS=15;
+    public static final int EXTRA_RUNS=16;
+    public static final int TOTAL_RUNS=17;
+    public static final int PLAYER_DISMISSED_NAME=18;
+    public static final int PLAYER_DISMISSED_TYPE=19;
+    public static final int FIELDER_NAME=20;
+
+    public static final int SEASON=1;
+    public static final int CITY=2;
+    public static final int DATE=3;
+
+    public static final int TEAM_ONE=4;
+    public static final int TEAM_TWO=5;
+    public static final int TOSS_WINNER=6;
+    public static final int TOSS_DECISION=7;
+    public static final int MATCH_RESULT=8;
+    public static final int DL_APLLIED=9;
+    public static final int WINNER=10;
+    public static final int WIN_BY_RUNS=11;
+    public static final int WIN_BY_WICKETS=12;
+    public static final int POM_NAME=13;
+    public static final int  VENUE=14;
+    public static final int  UMPIRE_ONE=15;
+    public static final int UMPIRE_TWO=16;
+    public static final int UMPIRE_THREE=17;
 
     public static void main(String[] args) {
         List<Match> matches = getMatchData();
@@ -34,31 +74,31 @@ public class Main {
                 String[] currentDelivery = l.split(",");
                 Delivery delivery = new Delivery();
                 delivery.setMatch_id(Integer.parseInt(currentDelivery[MATCH_ID]));
-                delivery.setInningsNumber(Integer.parseInt(currentDelivery[1]));
-                delivery.setBattingTeam(currentDelivery[2]);
-                delivery.setBowlingTeam(currentDelivery[3]);
-                delivery.setOver(Integer.parseInt((currentDelivery[4])));
-                delivery.setBall(Integer.parseInt(currentDelivery[5]));
-                delivery.setBatsmanName(currentDelivery[6]);
-                delivery.setBatsmanNameNS(currentDelivery[7]);
-                delivery.setBowler(currentDelivery[8]);
-                delivery.setIsMatchSuperOver(currentDelivery[9]);
-                delivery.setWideRuns(Integer.parseInt(currentDelivery[10]));
-                delivery.setByeRuns(Integer.parseInt(currentDelivery[11]));
-                delivery.setLegByesRuns(Integer.parseInt(currentDelivery[12]));
-                delivery.setNoBallRuns(Integer.parseInt(currentDelivery[13]));
-                delivery.setPenaltyRuns(Integer.parseInt(currentDelivery[14]));
-                delivery.setBatsmanRuns(Integer.parseInt(currentDelivery[15]));
-                delivery.setExtraRuns(Integer.parseInt(currentDelivery[16]));
-                delivery.setTotalRuns(Integer.parseInt(currentDelivery[17]));
-                if (currentDelivery.length > 18) {
-                    delivery.setPlayerDismissedName(currentDelivery[18]);
+                delivery.setInningsNumber(Integer.parseInt(currentDelivery[INNINGS_NUMBER]));
+                delivery.setBattingTeam(currentDelivery[BATTING_TEAM]);
+                delivery.setBowlingTeam(currentDelivery[BOWLING_TEAM]);
+                delivery.setOver(Integer.parseInt((currentDelivery[OVER])));
+                delivery.setBall(Integer.parseInt(currentDelivery[BALL]));
+                delivery.setBatsmanName(currentDelivery[BATSMAN_NAME]);
+                delivery.setBatsmanNameNS(currentDelivery[BATSMAN_NAME_NS]);
+                delivery.setBowler(currentDelivery[BOWLER]);
+                delivery.setIsMatchSuperOver(currentDelivery[IS_MATCH_SUPER_OVER]);
+                delivery.setWideRuns(Integer.parseInt(currentDelivery[WIDER_RUNS]));
+                delivery.setByeRuns(Integer.parseInt(currentDelivery[BYE_RUNS]));
+                delivery.setLegByesRuns(Integer.parseInt(currentDelivery[LEG_BYE_RUNS]));
+                delivery.setNoBallRuns(Integer.parseInt(currentDelivery[NO_BALL_RUNS]));
+                delivery.setPenaltyRuns(Integer.parseInt(currentDelivery[PENALTY_RUNS]));
+                delivery.setBatsmanRuns(Integer.parseInt(currentDelivery[BATSMAN_RUNS]));
+                delivery.setExtraRuns(Integer.parseInt(currentDelivery[EXTRA_RUNS]));
+                delivery.setTotalRuns(Integer.parseInt(currentDelivery[TOTAL_RUNS]));
+                if (currentDelivery.length > PLAYER_DISMISSED_NAME) {
+                    delivery.setPlayerDismissedName(currentDelivery[PLAYER_DISMISSED_NAME]);
                 }
-                if (currentDelivery.length > 19) {
-                    delivery.setDismissalType(currentDelivery[19]);
+                if (currentDelivery.length > PLAYER_DISMISSED_TYPE) {
+                    delivery.setDismissalType(currentDelivery[PLAYER_DISMISSED_TYPE]);
                 }
-                if (currentDelivery.length > 20) {
-                    delivery.setFielderName(currentDelivery[20]);
+                if (currentDelivery.length > FIELDER_NAME) {
+                    delivery.setFielderName(currentDelivery[FIELDER_NAME]);
                 }
                 allDeliveryData.add(delivery);
             }
@@ -87,35 +127,36 @@ public class Main {
                 String[] currentMatch = l.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
                 Match match = new Match();
 
-                match.setMatchId(Integer.parseInt(currentMatch[0]));
-                match.setSeason(Integer.parseInt(currentMatch[1]));
-                match.setCity(currentMatch[2]);
-                match.setDate(currentMatch[3]);
-                match.setTeamOneName(currentMatch[4]);
-                match.setTeamTwoName(currentMatch[5]);
-                match.setTossWinner(currentMatch[6]);
-                match.setTossDecision(currentMatch[7]);
-                match.setMatchResult(currentMatch[8]);
-                match.setDlApplied(Integer.parseInt(currentMatch[9]));
-                match.setWinner(currentMatch[10]);
-                match.setWinByRuns(Integer.parseInt(currentMatch[11]));
-                match.setWinByWickets(Integer.parseInt(currentMatch[12]));
-                match.setPomName(currentMatch[13]);
-                match.setVenue(currentMatch[14]);
+                match.setMatchId(Integer.parseInt(currentMatch[MATCH_ID]));
+                match.setSeason(Integer.parseInt(currentMatch[SEASON]));
+                match.setCity(currentMatch[CITY]);
+                match.setDate(currentMatch[DATE]);
+                match.setTeamOneName(currentMatch[TEAM_ONE]);
+                match.setTeamTwoName(currentMatch[TEAM_TWO]);
+                match.setTossWinner(currentMatch[TOSS_WINNER]);
+                match.setTossDecision(currentMatch[TOSS_DECISION]);
+                match.setMatchResult(currentMatch[MATCH_RESULT]);
+                match.setDlApplied(Integer.parseInt(currentMatch[DL_APLLIED]));
+                match.setWinner(currentMatch[WINNER]);
+                match.setWinByRuns(Integer.parseInt(currentMatch[WIN_BY_RUNS]));
+                match.setWinByWickets(Integer.parseInt(currentMatch[WIN_BY_WICKETS]));
+                match.setPomName(currentMatch[POM_NAME]);
+                match.setVenue(currentMatch[VENUE]);
 
-                if (currentMatch.length > 15) {
-                    match.setUmpireOneName(currentMatch[15]);
+                if (currentMatch.length > UMPIRE_ONE) {
+                    match.setUmpireOneName(currentMatch[UMPIRE_ONE]);
                 }
-                if (currentMatch.length > 16) {
-                    match.setUmpireTwoName(currentMatch[16]);
+                if (currentMatch.length > UMPIRE_TWO) {
+                    match.setUmpireTwoName(currentMatch[UMPIRE_TWO]);
                 }
-                if (currentMatch.length > 17) {
-                    match.setUmpireThreeName(currentMatch[17]);
+                if (currentMatch.length > UMPIRE_THREE) {
+                    match.setUmpireThreeName(currentMatch[UMPIRE_THREE]);
                 }
                 allMatchData.add(match);
             }
         } catch (FileNotFoundException e) {
             System.out.println("check your file location");
+
 
         } catch (IOException e) {
             throw new RuntimeException(e);
