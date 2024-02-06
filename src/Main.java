@@ -35,7 +35,6 @@ public class Main {
     public static final int SEASON=1;
     public static final int CITY=2;
     public static final int DATE=3;
-
     public static final int TEAM_ONE=4;
     public static final int TEAM_TWO=5;
     public static final int TOSS_WINNER=6;
@@ -51,7 +50,7 @@ public class Main {
     public static final int UMPIRE_TWO=16;
     public static final int UMPIRE_THREE=17;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         List<Match> matches = getMatchData();
         List<Delivery> deliveries = getDeliveryData();
 
@@ -62,7 +61,8 @@ public class Main {
         finsMostRunsByBatsmanInGivenTwoYear(getDeliveries(matches, deliveries , 2011), getDeliveries(matches , deliveries , 2017));
     }
 
-    public static List<Delivery> getDeliveryData() {
+
+    public static List<Delivery> getDeliveryData() throws IOException {
         List<Delivery> allDeliveryData = new ArrayList<>();
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader("src/deliveries.csv"));
@@ -103,10 +103,10 @@ public class Main {
                 allDeliveryData.add(delivery);
             }
         } catch (FileNotFoundException e) {
-
             System.out.println("Check your file location");
-            throw new RuntimeException(e);
-        } catch (IOException ignored) {
+            throw new FileNotFoundException();
+        } catch (IOException e) {
+            throw new IOException(e);
 
         }
         return allDeliveryData;
